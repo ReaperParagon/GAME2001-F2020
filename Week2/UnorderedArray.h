@@ -35,7 +35,7 @@ public:
 
 		if (m_numElements >= m_maxSize)
 		{
-			// Expand();
+			Expand();
 		}
 
 		// My array has space for the new value
