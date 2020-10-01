@@ -169,6 +169,17 @@ public:
 			m_array[i] = temp;
 		}
 	}
+	// Merge Sort -- Big O = O(N logN)
+	void MergeSort()
+	{
+		assert(m_array != NULL);
+
+		T* tempArray = new T[m_numElements];
+		assert(tempArray != NULL);
+
+		MergeSort(tempArray, 0, m_numElements - 1);
+		delete[] tempArray;
+	}
 
 	// Overload the [] operator
 	T& operator[](int index)
@@ -200,6 +211,58 @@ public:
 		m_growSize = val;
 	}
 private:
+	// Recursive Merge Sort
+	void MergeSort(T* tempArray, int lowerBound, int upperBound)
+	{
+		// Base case
+		if (lowerBound == upperBound)
+		{
+			return;
+		}
+
+		// Determine the middle of the array
+		int mid = (lowerBound + upperBound) >> 1;
+
+		MergeSort(tempArray, lowerBound, mid);		// Lower half MergeSort
+		MergeSort(tempArray, mid + 1, upperBound);	// Upper half MergeSort
+
+		// Merge
+		Merge(tempArray, lowerBound, mid + 1, upperBound);
+	}
+	void Merge(T* tempArray, int low, int mid, int upper)
+	{
+		// LowerBound, Mid + 1, UpperBound
+		int tempLow = low, tempMid = mid - 1;
+		int index = 0;
+
+		while (low <= tempMid && mid <= upper)
+		{
+			// Lower of the 2 values is smaller, move it to the tempArray
+			if (m_array[low] < m_array[mid])
+			{
+				tempArray[index++] = m_array[low++];
+			}
+			else
+			{
+				tempArray[index++] = m_array[mid++];
+			}
+		}
+
+		while (low <= tempMid)
+		{
+			tempArray[index++] = m_array[low++];
+		}
+		while (mid <= upper)
+		{
+			tempArray[index++] = m_array[mid++];
+		}
+
+		// Place the stored tempArray into the main array in the correct locations
+		for (int i = 0; i < upper - tempLow + 1; i++)
+		{
+			m_array[tempLow + i] = tempArray[i];
+		}
+	}
 	// Expansion
 	bool Expand()
 	{

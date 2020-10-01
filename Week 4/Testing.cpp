@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	cout << "Insertion Sort Algorithm" << endl;
+	cout << "Merge Sort Algorithm" << endl;
 
 	UnorderedArray<int> array(5);
 	array.push(80);
@@ -22,7 +22,7 @@ int main()
 
 	cout << endl;
 
-	array.InsertionSort();
+	array.MergeSort();
 
 	cout << "After sort: ";
 	for (int i = 0; i < array.GetSize(); i++)
