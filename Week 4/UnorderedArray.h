@@ -143,6 +143,32 @@ public:
 			}
 		}
 	}
+	// Insertion Sort -- Big O = O(N^2)
+	void InsertionSort()
+	{
+		assert(m_array != NULL);
+
+		T temp;
+		int i = 0;
+
+		for (int k = 1; k < m_numElements; k++)
+		{
+			temp = m_array[k];
+			i = k;
+
+			// Shifting of elements if necessary. Create a space for an element
+			// to be inserted in the correct location
+			while (i > 0 && m_array[i - 1] >= temp)
+			{
+				// Push elements to the right
+				m_array[i] = m_array[i - 1];
+				i--;
+			}
+
+			// Place the item in the correct location
+			m_array[i] = temp;
+		}
+	}
 
 	// Overload the [] operator
 	T& operator[](int index)
