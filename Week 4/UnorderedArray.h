@@ -110,6 +110,39 @@ public:
 			}
 		}
 	}
+	// Selection Sort -- Big O = O(N^2)
+	void SelectionSort()
+	{
+		assert(m_array != NULL);
+
+		T temp;
+		int min = 0;
+
+		// The lowest position to swap the smallest element to...
+		for (int k = 0; k < m_numElements - 1; k++)
+		{
+			min = k;
+
+			// Iterate through the array to find the smallest value
+			for (int i = k + 1; i < m_numElements; i++)
+			{
+				if (m_array[i] < m_array[min])
+				{
+					// Store the index to the smallest element
+					min = i;
+				}
+			}
+
+			// Swapping of the lowest element with the lowest available index
+			if (m_array[k] > m_array[min])
+			{
+				// Swap
+				temp = m_array[k];
+				m_array[k] = m_array[min];
+				m_array[min] = temp;
+			}
+		}
+	}
 
 	// Overload the [] operator
 	T& operator[](int index)
